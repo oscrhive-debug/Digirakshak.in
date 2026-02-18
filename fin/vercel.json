@@ -1,4 +1,5 @@
 {
-  "source": "/(.*)",
-  "destination": "/web.html"
+    "rewrites": [
+        {"source": "/(.*)", "destination": "/"}
+    ]
 }
