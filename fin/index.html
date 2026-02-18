@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigiRakshaK - Securing Your Digital Future</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', monospace;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* LOADING SCREEN */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #0a0a2e 0%, #000 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 1s ease-out;
+        }
+
+        .security-ring {
+            width: 120px;
+            height: 120px;
+            border: 3px solid transparent;
+            border-top: 3px solid #00d4ff;
+            border-right: 3px solid #ff003c;
+            border-radius: 50%;
+            animation: spin 2s linear infinite, glow 1s ease-in-out infinite alternate;
+            margin-bottom: 30px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 20px #00d4ff; }
+            100% { box-shadow: 0 0 40px #00d4ff, 0 0 60px #ff003c; }
+        }
+
+        .loader-text {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 8%;
+            background: rgba(10,10,14,0.95);
+            border-bottom: 1px solid rgba(0,212,255,0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(15px);
+        }
+
+        header .logo {
+            font-size: 1.6rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #00d4ff, #ff003c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0,212,255,0.5);
+        }
+
+        header nav {
+            display: flex;
+            gap: 40px;
+        }
+
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+            background: linear-gradient(135deg, #0a0a2e 0%, #1a0a2e 50%, #16213e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+            opacity: 0;
+            transform: translateX(-100px);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            line-height: 1.1;
+            background: linear-gradient(45deg, #00d4ff, #ffffff, #ff003c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(0,212,255,0.5);
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateX(-100px);
+        }
+
+        .hero-image {
+            width: 500px;
+            height: 400px;
+            border-radius: 30px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0,212,255,0.3);
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            opacity: 0;
+            transform: translateX(200px);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* TECHNOLOGY SECTION (WITH PARALLAX) */
+        .features {
+            padding: 100px 10%;
+            background: linear-gradient(180deg, #0a0a2e 0%, #000 100%);
+            position: relative;
+            overflow: hidden;
+            z-index: 5;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(transparent, #00d4ff, transparent);
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 80px;
+            background: linear-gradient(45deg, #00d4ff, #ff003c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0;
+            transform: translateY(50px);
+            position: relative;
+            z-index: 10;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            position: relative;
+            z-index: 10;
+            perspective: 1000px;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0,212,255,0.3);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: box-shadow 0.4s, border-color 0.4s, opacity 0.8s ease-out;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+
+        .feature-card:hover {
+            box-shadow: 0 30px 60px rgba(0,212,255,0.3);
+            border-color: #00d4ff;
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #00d4ff, #ff003c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            transform: translateZ(30px);
+        }
+
+        /* TEAM SECTION */
+        .team {
+            padding: 100px 10%;
+            background: linear-gradient(135deg, #1a0a2e 0%, #0a0a2e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .team-card {
+            perspective: 1000px;
+            height: 500px; 
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .team-card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(0,212,255,0.3);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            padding: 40px;
+        }
+
+        .team-avatar {
+            width: 180px; 
+            height: 240px; 
+            border-radius: 4px; 
+            background: linear-gradient(45deg, #00d4ff, #ff003c);
+            margin-bottom: 20px; 
+            animation: pulseAvatar 2s infinite;
+            background-size: cover;
+            background-position: center;
+            display: block;
+            object-fit: cover;
+        }
+
+        .team-avatar.aryak { background-image: url('founder.png'); }
+        .team-avatar.vatsal { background-image: url('founder2.png'); }
+        .team-avatar.navidita { background-image: url('cmo.png'); }
+
+        @keyframes pulseAvatar {
+            0%, 100% { box-shadow: 0 0 20px rgba(0,212,255,0.5); }
+            50% { box-shadow: 0 0 40px rgba(0,212,255,0.8), 0 0 60px rgba(255,0,60,0.4); }
+        }
+
+        /* STATS SECTION */
+        .stats {
+            padding: 100px 10%;
+            background: radial-gradient(ellipse at center, #0a0a2e 0%, #000 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .stat-item { text-align: center; }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #00d4ff, #ff003c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* AWARDS SECTION */
+        .awards {
+            padding: 100px 10%;
+            background: linear-gradient(135deg, #0a0a2e 0%, #000 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .award-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0,212,255,0.3);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s;
+        }
+
+        .award-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,212,255,0.3);
+            border-color: #00d4ff;
+        }
+
+        .award-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #00d4ff, #ff003c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* FOOTER */
+        .footer {
+            padding: 60px 10% 30px;
+            background: #000;
+            text-align: center;
+            border-top: 1px solid rgba(0,212,255,0.2);
+        }
+
+        .social-links { margin-bottom: 30px; }
+        .social-links a {
+            color: #00d4ff;
+            font-size: 1.5rem;
+            margin: 0 20px;
+            text-decoration: none;
+            animation: neonFlicker 2s infinite;
+        }
+
+        @keyframes neonFlicker {
+            0%, 100% { text-shadow: 0 0 10px #00d4ff; }
+            50% { text-shadow: 0 0 20px #00d4ff, 0 0 30px #ff003c; }
+        }
+
+        /* ANIMATIONS */
+        body.loaded .hero-content, body.loaded .hero h1, body.loaded .hero p { animation: slideInRight 1.2s ease-out 0.3s both; }
+        body.loaded .hero-image { animation: slideInLeft 1.2s ease-out 0.6s both; }
+        body.loaded .section-title { animation: fadeInUp 1s ease-out 0.4s both; }
+
+        @keyframes slideInRight { from { transform: translateX(-100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideInLeft { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes fadeInUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(#00d4ff, #ff003c); border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">DIGIRAKSHAK</div>
+        <nav>
+            <a href="web.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <div class="loader" id="loader">
+        <div class="security-ring"></div>
+        <div class="loader-text">DIGIRAKSHAK LOADING...</div>
+    </div>
+
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <h1>𝐃𝐈𝐆𝐈𝐑𝐀𝐊𝐒𝐇𝐀𝐊</h1>
+            <p>𝓛𝓮𝓽 𝓲𝓽 𝓫𝓮 𝓲𝓷𝓿𝓲𝓼𝓲𝓫𝓵𝓮</p>
+        </div>
+        <div class="hero-image">
+            <img src="logo.jpg" alt="DigiRakshaK">
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="timeline-line" id="parallaxLine"></div>
+        <h2 class="section-title" id="featuresTitle">Our Technology</h2>
+        <div class="features-grid">
+            <div class="feature-card parallax-card">
+                <div class="feature-icon">GPS</div>
+                <h3><b>GPS Tracking</b></h3>
+                <p>𝑅𝑒𝒶𝓁-𝓉𝒾𝓂𝑒 𝓁𝑜𝒸𝒶𝓉𝒾𝑜𝓃 𝓂𝑜𝓃𝒾𝓉𝑜𝓇𝒾𝓃𝑔 𝓌𝒾𝓉𝒽 𝓂𝒾𝓁𝒾𝓉𝒶𝓇𝓎-𝑔𝓇𝒶𝒹𝑒 𝓅𝓇𝑒𝒸𝒾𝓈𝒾𝑜𝓃.</p>
+            </div>
+            <div class="feature-card parallax-card">
+                <div class="feature-icon">SOS</div>
+                <h3>SOS Emergency Alerts</h3>
+                <p>𝐼𝓃𝓈𝓉𝒶𝓃𝓉 𝒹𝒾𝓈𝓉𝓇𝑒𝓈𝓈 𝓈𝒾𝑔𝓃𝒶𝓁𝓈 𝓌𝒾𝓉𝒽 𝒶𝓊𝓉𝑜𝓂𝒶𝓉𝑒𝒹 𝓁𝑜𝒸𝒶𝓉𝒾𝑜𝓃 𝓈𝒽𝒶𝓇𝒾𝓃𝑔.</p>
+            </div>
+            <div class="feature-card parallax-card">
+                <div class="feature-icon">📡</div>
+                <h3>Real-time Monitoring</h3>
+                <p>𝐼𝓃𝓈𝓉𝒶𝓃𝓉 𝒹𝒾𝓈𝓉𝓇𝑒𝓈𝓈 𝓈𝒾𝑔𝓃𝒶𝓁𝓈 𝓌𝒾𝓉𝒽 𝒶𝓊𝓉𝑜𝓂𝒶𝓉𝑒𝒹 𝓁𝑜𝒸𝒶𝓉𝒾𝑜𝓃 𝓈𝒽𝒶𝓇𝒾𝓃𝑔</p>
+            </div>
+            <div class="feature-card parallax-card">
+                <div class="feature-icon">📦</div>
+                <h3>Compact Design</h3>
+                <p>𝒮𝓁𝑒𝑒𝓀, 𝒾𝓃𝓋𝒾𝓼𝒾𝓫𝓁𝑒 𝓅𝓇𝑜𝓉𝑒𝒸𝓉𝒾𝑜𝓃 𝓉𝒽𝒶𝓉 𝒷𝓁𝑒𝓃𝒹𝓈 𝓈𝑒𝒶𝓂𝓁𝑒𝓈𝓈𝓁𝓎.</p>
+            </div>
+            <div class="feature-card parallax-card">
+                <div class="feature-icon">🎤</div>
+                <h3>Noise Capturing</h3>
+                <p>𝒜𝒹𝓋𝒶𝓃𝒸𝑒𝒹 𝒶𝓊𝒹𝒾𝑜 𝒶𝓃𝒶𝓁𝓎𝓈𝒾𝓈 𝒻𝑜𝓇 𝑒𝓃𝓋𝒾𝓇𝑜𝓃𝓂𝑒𝓃𝓉𝒶𝓁 𝒶𝓌𝒶𝓇𝑒𝓃𝑒𝓈𝓈.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="team">
+        <h2 class="section-title">Meet Our Team</h2>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="team-avatar aryak"></div>
+                        <h3>Aryak Sahai</h3>
+                        <p>Founder</p>
+                    </div>
+                    <div class="card-back">
+                        <div class="team-avatar aryak"></div>
+                        <h3>Visionary Leader</h3>
+                        <p>Founder of Digirakshak, a young innovator driven by a vision to create smart safety solutions for women and children through technology.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="team-avatar vatsal"></div>
+                        <h3>Vatsal Garg</h3>
+                        <p>Founder</p>
+                    </div>
+                    <div class="card-back">
+                        <div class="team-avatar vatsal"></div>
+                        <h3>Tech Mastermind</h3>
+                        <p>Founder, focused on strategic development and operational execution to turn innovative ideas into scalable real-world products.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="team-avatar navidita"></div>
+                        <h3>Navidita</h3>
+                        <p>CMO</p>
+                    </div>
+                    <div class="card-back">
+                        <div class="team-avatar navidita"></div>
+                        <h3>Growth Architect</h3>
+                        <p>Leads branding, digital presence, and growth strategy to position Digirakshak as a trusted safety-tech brand..</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <h2 class="section-title">Our Impact</h2>
+        <div class="stats-grid">
+            <div class="stat-item"><span class="stat-number" data-target="25">0</span><div class="stat-label">Universities Pitched</div></div>
+            <div class="stat-item"><span class="stat-number" data-target="2">0</span><div class="stat-label">Institutions Funded</div></div>
+            <div class="stat-item"><span class="stat-number" data-target="8">0</span><div class="stat-label">Institutions Recognized</div></div>
+        </div>
+    </section>
+
+    <section class="awards">
+        <h2 class="section-title">Recognition & Awards</h2>
+        <div class="awards-grid" id="awardsGrid">
+            <div class="award-card"><div class="award-icon">🏆</div><h3>Best Innovation 2025</h3><p>National Tech Summit</p></div>
+            <div class="award-card"><div class="award-icon">🏆</div><h3>Startup of the Year</h3><p>DigiIndia Awards</p></div>
+            <div class="award-card"><div class="award-icon">🏆</div><h3>Top 10 Security Tech</h3><p>Global Cyber Summit</p></div>
+            <div class="award-card"><div class="award-icon">🏆</div><h3>Women in Tech Champion</h3><p>WomenTech Foundation</p></div>
+            <div class="award-card"><div class="award-icon">🏆</div><h3>Excellence in Safety</h3><p>SafeTech Awards</p></div>
+            <div class="award-card"><div class="award-icon">🏆</div><h3>Young Innovators</h3><p>Future Leaders Forum</p></div>
+        </div>
+    </section>
+
+    <footer id="footer" class="footer">
+        <div class="social-links">
+            <a href="#">📱 @digirakshak</a>
+            <a href="#">📞 Contact</a>
+        </div>
+        <div style="opacity: 0.6; font-size: 0.9rem;">@DigiRakshaK 2026</div>
+    </footer>
+
+    <script>
+        // LOADING SCREEN
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                    document.body.classList.add('loaded');
+                }, 1000);
+            }, 5000);
+        });
+
+        // MOUSE PARALLAX FOR TECH CARDS
+        const cards = document.querySelectorAll('.parallax-card');
+        document.addEventListener('mousemove', (e) => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 30;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 30;
+            cards.forEach(card => {
+                if(card.style.opacity === "1") {
+                    card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+                }
+            });
+        });
+
+        // SCROLL PARALLAX
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const features = document.querySelector('.features');
+            if (features) {
+                const relativeScroll = scrolled - features.offsetTop;
+                document.getElementById('featuresTitle').style.transform = `translateY(${relativeScroll * 0.1}px)`;
+                document.getElementById('parallaxLine').style.transform = `translateX(-50%) translateY(${relativeScroll * 0.15}px)`;
+            }
+        });
+
+        // STATS COUNTER
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const number = entry.target.querySelector('.stat-number');
+                    const target = parseInt(number.getAttribute('data-target'));
+                    let current = 0;
+                    const timer = setInterval(() => {
+                        current += target/100;
+                        if (current >= target) {
+                            number.textContent = target + '+';
+                            clearInterval(timer);
+                        } else {
+                            number.textContent = Math.floor(current) + '+';
+                        }
+                    }, 30);
+                }
+            });
+        });
+        document.querySelectorAll('.stat-item').forEach(item => observer.observe(item));
+
+        // FEATURE REVEAL
+        window.addEventListener('scroll', () => {
+            const section = document.querySelector('.features');
+            const rect = section.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 0.8) {
+                section.querySelectorAll('.feature-card').forEach((card, i) => {
+                    setTimeout(() => { card.style.opacity = 1; card.style.transform = 'translateY(0)'; }, i * 150);
+                });
+            }
+        });
+
+        // AWARDS ROTATION
+        const grid = document.getElementById('awardsGrid');
+        let awardCards = Array.from(grid.children);
+        function rotateAwards() {
+            const first = awardCards.shift();
+            awardCards.push(first);
+            awardCards.forEach(card => grid.appendChild(card));
+        }
+        setInterval(rotateAwards, 4000);
+    </script>
+   <script type="text/javascript">
+    (function (l) {
+      if (l.search[1] === "/") {
+        var decoded = l.search
+          .slice(1)
+          .split("&")
+          .map(function (s) {
+            return s.replace(/~and~/g, "&");
+          })
+          .join("?");
+        window.history.replaceState(
+          null,
+          null,
+          l.pathname.slice(0, -1) + decoded + l.hash
+        );
+      }
+    })(window.location);
+  </script>
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DG BELT - Tactical Tech</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-cyan: #00d4ff;
+            --neon-pink: #ff003c;
+            --dark-bg: #050505;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER SECTION --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 8%;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--neon-cyan);
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+        nav {
+            display: flex;
+            gap: 40px;
+        }
+
+        nav a {
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            opacity: 0.8;
+        }
+
+        nav a:hover {
+            color: var(--neon-cyan);
+            opacity: 1;
+            text-shadow: 0 0 8px var(--neon-cyan);
+        }
+
+        h1, h2, h3, .price {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* TECH BACKGROUND MESH */
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--glass) 1px, transparent 1px),
+                linear-gradient(90deg, var(--glass) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            opacity: 0.2;
+        }
+
+        /* PRODUCT HERO SECTION */
+        .container {
+            max-width: 1200px;
+            margin: 140px auto 100px; /* Adjusted margin for fixed header */
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        /* IMAGE STYLING */
+        .product-visual {
+            position: relative;
+            padding: 20px;
+            border: 1px solid var(--neon-cyan);
+            background: rgba(0, 212, 255, 0.05);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .product-visual:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.4);
+        }
+
+        .product-visual img {
+            width: 100%;
+            display: block;
+            border-radius: 10px;
+            filter: contrast(1.1) brightness(1.1);
+        }
+
+        .scanning-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--neon-cyan);
+            box-shadow: 0 0 15px var(--neon-cyan);
+            animation: scan 3s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+
+        /* INFO STYLING */
+        .product-info h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #fff, var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .price {
+            font-size: 2rem;
+            color: var(--neon-pink);
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        .description {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        .specs {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .specs li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+            font-weight: 500;
+        }
+
+        .specs li::before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: var(--neon-cyan);
+            font-size: 0.8rem;
+        }
+
+        /* BUTTONS */
+        .btn-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .buy-now {
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #00c6ff, #0072ff);
+            border: none;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .buy-now:hover {
+            box-shadow: 0 0 20px var(--neon-cyan);
+            transform: translateY(-3px);
+        }
+
+        /* REVIEWS SECTION */
+        .reviews-section {
+            background: rgba(10, 10, 10, 0.8);
+            padding: 80px 20px;
+            border-top: 1px solid var(--glass);
+        }
+
+        .review-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .review-card {
+            background: var(--glass);
+            padding: 30px;
+            border-left: 3px solid var(--neon-pink);
+            backdrop-filter: blur(10px);
+        }
+
+        .stars {
+            color: #ffcc00;
+            margin-bottom: 15px;
+        }
+
+        .reviewer-name {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: var(--neon-cyan);
+        }
+
+        /* MOBILE RESPONSIVENESS */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                margin-top: 100px;
+            }
+            .product-info h1 { font-size: 2.5rem; }
+            nav { gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grid-overlay"></div>
+
+    <header>
+        <a href="#" class="logo">DIGIRAKSHAK</a>
+        <nav>
+            <a href="web.html">HOME</a>
+            <a href="shop.html">SHOP</a>
+            <a href="contact.html">Contact</a>
+            
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="product-visual">
+            <div class="scanning-line"></div>
+            <img src="belt.jpg" alt="DG BELT Tactical Unit">
+        </div>
+
+        <div class="product-info">
+            <h3 style="color: var(--neon-cyan); margin-bottom: 10px;">V1.0</h3>
+            <h1>DG BELT</h1>
+            <div class="price">₹1000.00</div>
+            
+            <p class="description">
+                Digirakshak Belt Version – A sleek, wearable belt that houses your Digirakshak device securely, ensuring instant access during emergencies. Its ergonomic design keeps it comfortable for daily wear while providing hands-free safety, making protection discreet and always within reach. Ideal for outdoor activities, travel, or everyday use, it blends convenience with smart security.
+            </p>
+
+            <ul class="specs">
+                <li>Hands-Free Safety – Keeps your Digirakshak device accessible without holding it.</li>
+                <li>Ergonomic Design – Comfortable to wear all day, anywhere.</li>
+                <li>Quick Access – Instantly reach your device during emergencies.</li>
+                <li>Discreet & Stylish – Blends seamlessly with everyday outfits.</li>
+            </ul>
+
+            <div class="btn-group">
+                <button class="buy-now">INITIALIZE PURCHASE</button>
+            </div>
+        </div>
+    </main>
+
+    <section class="reviews-section">
+        <h2 style="text-align: center; margin-bottom: 50px;">User Feedback</h2>
+        <div class="review-grid">
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p>"The build quality is insane. It looks like it belongs in 2077. Holds my EDC gear perfectly."</p>
+                <span class="reviewer-name">@nitinsahai</span>
+            </div>
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p>"Finally a belt that doesn't look like generic military surplus. The DG branding looks sick."</p>
+                <span class="reviewer-name">@vedantgarg</span>
+            </div>
+            <div class="review-card">
+                <div class="stars">★★★★☆</div>
+                <p>"Sleek, functional, and the magnetic buckle is incredibly satisfying to use."</p>
+                <span class="reviewer-name">@ayanag58</span>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const visual = document.querySelector('.product-visual');
+        document.addEventListener('mousemove', (e) => {
+            let xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+            let yAxis = (window.innerHeight / 2 - e.pageY) / 50;
+            visual.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+    </script>
+
+</body>
+</html>

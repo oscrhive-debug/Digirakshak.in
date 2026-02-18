@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DG STORE - Tactical Tech</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Rajdhani', sans-serif;
+  scroll-behavior:smooth;
+}
+
+body{
+  background:#050505;
+  color:white;
+  overflow-x: hidden;
+}
+
+/* ================= HEADER ================= */
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 8%;
+    background: rgba(5, 5, 5, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #00d4ff;
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+nav {
+    display: flex;
+    gap: 40px;
+}
+
+nav a {
+    font-family: 'Orbitron', sans-serif;
+    position: relative;
+    text-decoration: none;
+    color: white;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: 0.1s;
+    opacity: 0.8;
+}
+
+nav a:hover {
+    color: #00d4ff;
+    opacity: 1;
+    text-shadow: 0 0 8px #00d4ff;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  padding-top:70px;
+}
+
+.slide{
+  position:absolute;
+  opacity:0;
+  transform:scale(0.9) translateY(40px);
+  filter:blur(10px);
+  transition:1.0s ease;
+}
+
+.slide.active{
+  opacity:1;
+  transform:scale(1) translateY(0px);
+  filter:blur(0px);
+}
+
+.slide h1{
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  text-transform: uppercase;
+  background:linear-gradient(45deg,#00d4ff,#ff003c);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:glowPulse 3s infinite alternate;
+}
+
+@keyframes glowPulse{
+  0%{ text-shadow:0 0 10px #00d4ff; }
+  100%{ text-shadow:0 0 25px #ff003c; }
+}
+
+/* ================= PARALLAX ================= */
+
+.parallax-section{
+  height:40vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+
+.parallax-text{
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(2rem, 10vw, 5rem);
+  font-weight:bold;
+  text-transform:uppercase;
+  background:linear-gradient(90deg,#00d4ff,#ff003c,#00d4ff);
+  background-size:200%;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:gradientMove 6s linear infinite;
+}
+
+@keyframes gradientMove{
+  0%{ background-position:0%; }
+  100%{ background-position:200%; }
+}
+
+/* ================= PRODUCTS ================= */
+
+.products{
+  padding:100px 8%;
+  text-align:center;
+}
+
+.products h2{
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  margin-bottom:60px;
+  text-transform: uppercase;
+}
+
+.product-grid{
+  display:flex;
+  gap:40px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.card{
+  width:320px;
+  background: rgba(255, 255, 255, 0.03);
+  border:1px solid rgba(0,212,255,0.2);
+  border-radius:15px;
+  overflow:hidden;
+  transition:0.4s ease;
+  backdrop-filter: blur(10px);
+}
+
+.card:hover{
+  transform:translateY(-10px);
+  border:1px solid #00d4ff;
+  box-shadow:0 0 25px rgba(0,212,255,0.4);
+}
+
+.card img{
+  width:100%;
+  height:250px;
+  object-fit:cover;
+  filter: brightness(0.8) contrast(1.2);
+}
+
+.card-content{
+  padding:25px;
+}
+
+.card-content h3{
+  font-family: 'Orbitron', sans-serif;
+  margin-bottom:10px;
+  color: #00d4ff;
+}
+
+.card-content p{
+  font-size:1rem;
+  opacity:0.7;
+  margin-bottom:25px;
+  height: 50px;
+}
+
+.shop-btn{
+  display:inline-block;
+  padding:12px 30px;
+  border:none;
+  background:linear-gradient(45deg,#00d4ff,#0072ff);
+  color:white;
+  text-decoration:none;
+  border-radius:5px;
+  font-family: 'Orbitron', sans-serif;
+  font-size:0.8rem;
+  font-weight: bold;
+  letter-spacing:1px;
+  transition:0.4s ease;
+}
+
+.shop-btn:hover{
+  box-shadow:0 0 20px #00d4ff;
+  transform:scale(1.05);
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+  background:rgba(5,5,5,0.95);
+  padding:60px 8%;
+  text-align:center;
+  border-top:1px solid rgba(0,212,255,0.3);
+  position:relative;
+}
+
+.footer-links{
+  margin-bottom:30px;
+}
+
+.footer-links a{
+  font-family: 'Orbitron', sans-serif;
+  margin:0 20px;
+  text-decoration:none;
+  color:white;
+  font-size: 0.8rem;
+  transition:0.3s;
+}
+
+.footer-links a:hover{
+  color:#00d4ff;
+}
+
+.footer-bottom{
+  font-size:0.9rem;
+  opacity:0.6;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+    <a href="web.html" class="logo">DIGIRAKSHAK</a>
+    <nav>
+        <a href="web.html">HOME</a>
+        <a href="shop.html">SHOP</a>
+        <a href="contact.html">CONTACT</a>
+    </nav>
+</header>
+
+<section class="hero" id="home">
+  <div class="slide active">
+    <h1>Future Technology</h1>
+  </div>
+  <div class="slide">
+    <h1>Premium Innovation</h1>
+  </div>
+  <div class="slide">
+    <h1>Next Gen Safety</h1>
+  </div>
+</section>
+
+<section class="parallax-section">
+  <div class="parallax-text">DIGIRAKSHAK </div>
+</section>
+
+<section class="products" id="shop">
+  <h2>Featured Tactical Gear</h2>
+
+  <div class="product-grid">
+
+    <div class="card">
+      <img src="p1.jpg" alt="DG Belt">
+      <div class="card-content">
+        <h3>DG BELT</h3>
+        <p>Tactical efficiency with integrated safety device housing.</p>
+        <a href="belt.html" class="shop-btn">INITIALIZE ACCESS</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="p2.jpg" alt="Dog Hook">
+      <div class="card-content">
+        <h3>DG DOG HOOK</h3>
+        <p>Heavy-duty pet protection for high-risk environments.</p>
+        <a href="dog.html" class="shop-btn">INITIALIZE ACCESS</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="p3.jpg" alt="Hair Holder">
+      <div class="card-content">
+        <h3>DG HAIR HOLDER</h3>
+        <p>Discreet tactical integration for everyday civilian wear.</p>
+        <a href="female.html" class="shop-btn">INITIALIZE ACCESS</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="footer-links">
+    <a href="web.html">HOME</a>
+    <a href="shop.html">SHOP</a>
+    <a href="contact.html">CONTACT</a>
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 DIGIRAKSHAK. ALL RIGHTS RESERVED. [SYSTEM ONLINE]
+  </div>
+</footer>
+
+<script>
+let slides=document.querySelectorAll(".slide");
+let index=0;
+
+setInterval(()=>{
+  slides[index].classList.remove("active");
+  index=(index+1)%slides.length;
+  slides[index].classList.add("active");
+},4000);
+
+window.addEventListener("scroll",()=>{
+  const parallaxText=document.querySelector(".parallax-text");
+  let scrollPosition=window.scrollY;
+  // Adjusted for better scroll feel
+  parallaxText.style.transform=`translateY(${(scrollPosition - 800) * 0.2}px)`;
+});
+</script>
+
+</body>
+</html>
